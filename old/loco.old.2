@@ -1,0 +1,69 @@
+#!/bin/bash
+#
+# loco
+#
+# A script to do more with the output of locate.
+# A script called row (which see) will work from within this script.
+# A script called filetype appends a character to the end of each line (like ls -F).  I would like to merge it inside this script.
+#
+tempdir=$(mktemp -d)
+infile=${tempdir}/loco.$$
+export outfile=${infile}.out
+
+trap cleanup EXIT
+
+cleanup () {
+	rm -r ${tempdir}
+}
+
+awk_statement () {
+obj=`awk '$1 == '$linenum' { print $2 } ' "${outfile}"`
+echo "$cmd $obj"
+$cmd $obj
+}
+
+# May want to limit this (locate -l, --limit, -n  _LIMIT_) or get a count (locate -c, --count) and compare it to some pre-chosen limit.  Files could get very large if one enters something like e or / as the first argument.
+
+
+count=$(locate -c $1)
+
+if [ $count -gt "10000" ]; then
+	echo -n "File will have "$count" lines.  Do you wish to continue?(y/N): "; read response
+fi
+
+case $response in
+	y|Y)
+		echo "Processing..."
+		;;
+	*)
+		echo "Aborting..."
+		sleep 0.5
+		exit
+		;;
+esac
+
+
+locate $1 | xargs filetype > ${infile}
+
+sed = ${infile} | sed 'N;s/\n/\t/' > ${outfile}
+
+# This could be set to pager of choice.  I would like this eventually to be ncurses-based and self-contaned.
+less ${outfile}
+
+echo -n "Command: "; read cmd
+
+case $cmd in
+    q|quit|"")
+	;;
+    row*)
+	echo "$cmd"
+	$cmd
+	;;
+    *)
+	echo -n "Line No.: "; read linenum 
+	# add test for NULL or not integer in $linenum
+	awk_statement
+	;;
+esac
+
+exit 0

@@ -1,0 +1,29 @@
+Add --help section/option
+   Find out if you can less text from within a file
+   If not, create a help file and source that
+
+Find out if pagers exist that do not take !(exec shell)
+   If they do, find out which ones and have loco work around them by activating the "Command: " and "Line No.: " section of the script (define as a function?)
+
+Set pager to $PAGER?
+
+[DONE]Figure out !row n command workaround.  Would rather have normal syntax !command n
+
+Set up .conf file?
+
+Clean up tabs/indentations in actual file
+
+Push loco as a project
+
+Add --conf option?
+
+Configure on first run?
+   Test for .loco.conf file?
+
+.conf parameters:
+   count.entries threshhold
+   pager
+
+[DONE]Add find function if count.entries = 0 due to updatedb lag.  Something like find foo somewhere in your $HOME directory and send output to $PAGER in loco style.
+
+find $HOME -name *foo* -print0 | xargs -0 filetype | sed = | sed 'N;s/\n/\t/' > ${outfile}
