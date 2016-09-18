@@ -7,7 +7,9 @@
 # A script called filetype appends a character to the end of each line 
 # (like ls -F).  I would like to merge it inside this script.
 #
-# Depends: row, filetype
+# Depends: GNU findutils (locate, xargs, updatedb), less, row.sh, filetype.sh
+
+# [Add test for dependencies.]
 
 # [Explain what this does.]
 outfile=/tmp/loco.$$
