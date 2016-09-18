@@ -27,3 +27,13 @@ Configure on first run?
 [DONE]Add find function if count.entries = 0 due to updatedb lag.  Something like find foo somewhere in your $HOME directory and send output to $PAGER in loco style.
 
 find $HOME -name *foo* -print0 | xargs -0 filetype | sed = | sed 'N;s/\n/\t/' > ${outfile}
+
+Display the file a target points to:
+
+...
+33	/path/to/link	[@] ->	/path/to/target
+...
+
+Switch output of filetype so that the file type symbol comes before the /path/to/file && edit row.sh accordingly (change field numbewr fromw 2 to 3?).
+
+Find out if rifle will open $outfile.
