@@ -1,0 +1,155 @@
+How to Use loco
+
+loco is a shell script for harnessing the output of the locate command.
+locate is an easy and powerful command to use for finding files quickly.  Its
+raw output, however, is not particularly useful.  The analogy is like trying
+to drink water from a fire hydrant.  The results burst forth and scroll off
+your screen.  Try this:
+
+locate bash
+
+What the hell are you supposed to do with that?
+
+loco captures that output in a temporary text file and gives you a way to
+navigate the results and view, compare, or edit them.  loco is also good for
+finding files that live in different parts of your filesystem and contain your
+search term in their names.  If you narrow the search enough, the results can
+provide you with context and insight as to how the files and software are set
+up and where to look for things like scripts and settings.
+
+
+Quick tutorial
+
+Let's say you want to check your .bashrc file against the default file.  The
+.bashrc file is sourced each time you start a new bash shell.  It sets up
+several things that make the shell behave a certain way.  If you've modified
+it heavily, you may want to check it against the default bashrc file to see
+what has been changed, especially if something doesn't seem to be working
+quite right.
+ 
+COMMAND:
+
+loco search_term
+
+Try this:
+
+loco bash
+
+What you see (the line numbers may be different for your output):
+
+1       /bin/bash       [*]
+2       /bin/rbash      [*]
+3       /etc/bash.bashrc
+4       /etc/bash_completion
+5       /etc/bash_completion.d  [/]
+6       /etc/apparmor.d/abstractions/bash
+7       /etc/bash_completion.d/acroread.sh      [@]
+8       /etc/bash_completion.d/apport_completion
+...
+Bunch of lines
+...
+49      /home/nicky/.bash_history
+50      /home/nicky/.bash_logout
+51      /home/nicky/.bashrc
+...
+
+Each line reads like this:
+
+line_number /path/to/file_name [file_type]
+
+You will use line_number when you use the row command (later on).  The
+file_type is a symbol which tells you what type of file you are looking at:
+
+/ directory
+* executable
+@ link (shortcut to another file)
+| pipe
+= socket
+? unknown
+
+If there is no file_type symbol after the file_name then it is a regular file.
+
+
+Understanding less
+
+As stated in the introduction, loco creates a text file in the /tmp folder and
+opens it for viewing in less.  If you're not familiar with less, it's a
+program called a pager that displays the contents of a file.  less is not an
+editor.
+
+Movement in less is similar to vi:
+
+j to move down one line
+k to move up one line
+<Space> to move down one screenful
+g to go to the top
+G to go to the bottom
+/ to search (/search_term <Enter>)
+n to jump to next search_term
+N to jump to previous search_term
+q to quit
+
+
+Running Shell Commands from less
+
+You can also run shell commands from less.  This is how you use the output
+from loco.  To do this you start the command with a bang (!).  
+
+Let's look at our example output from above.  Line 51 contains our .bashrc
+file.  Line 3 contains the default bashrc file.  To see our file we would
+type:
+
+!less `row 51`
+
+This opens a new instance of less with the contents of our .bashrc file.
+Notice that row 51 above is enclosed in `backticks` (located on the same key
+as the ~).  This is how we get row to work from less.  The backticks tell the
+shell to take the output of the script row with the argument 51 (our
+line_number).  The result of that is the text /home/nicky/.bashrc.  That text
+is then used by less as its argument.  It's kind of like the Order of
+Operatioins in math.  The bang (!) at the beginning tells less to run a shell
+command.
+
+When you are done exploring the file, you can quit with a q.  You will be
+presented with a line that says:
+
+!done (press RETURN)
+
+at which point you may press <Return> to continue working with your search or
+press q to quit the active loco process.  This will delete the file created in
+the /tmp directory and clean up any other odds and ends from the search.  If
+you weren't actually done with the search, you can hit <Ctrl>-p to get the
+last command and do the search over again.
+
+If you wanted to look at the default bashrc file you would type:
+
+!less `row 3`
+
+If you wanted to edit our .bashrc file with nano, you would type:
+
+!nano `row 51`
+
+The idea here is that the commands look like this:
+
+!command `row n`
+
+where command is the command you want to run and n is the line_number.
+
+Try it now in your actual search.  Remember, the line numbers will most likely
+differ from the ones in this example.
+
+
+Updating the Database
+
+locate (and thus loco) works by looking for your search term in a database of
+the filesystem.  The database is not updated instantaneously, however.  If you
+create a file and then try to use loco to find it, it will not show up in the
+results.  The database in managed by updatedb.  It is normally set up to run
+once a day to comb the filesystem for changes (new, moved, or deleted files).
+I have found that this doesn't seem to run automatically in the crouton
+environment.  You can run it manually by issuing:
+
+sudo updatedb
+
+and waiting a few minutes for it to run.  I don't find that it's necessary to
+do this more than once a day.
