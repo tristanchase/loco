@@ -7,7 +7,7 @@
 ## Dependencies
 
 ### System
-sys_deps="locate updatedb xargs"
+sys_deps="findutils" #locate updatedb xargs
 
 ### loco-specific
 files="loco row filetype"
