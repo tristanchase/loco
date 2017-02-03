@@ -46,6 +46,12 @@ for file in $script_deps; do
 	chmod 755 $file   # Make the $file executable
 done
 
+# Create and populate the locate database
+echo "Creating and populating the locate database. This will take a few minutes."
+echo "Stand by..."
+sudo updatedb
+echo "locate database complete."
+
 sleep 2
 echo "Installation complete. You may now use loco by typing it on the command line."
 echo ""
