@@ -12,7 +12,7 @@
 ## Dependencies
 
 ### System
-sys_deps="findutils less" #locate updatedb xargs
+sys_deps="findutils locate less" #updatedb xargs
 
 ### loco-specific
 script_deps="loco row filetype"
