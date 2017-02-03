@@ -15,7 +15,7 @@
 sys_deps="findutils less" #locate updatedb xargs
 
 ### loco-specific
-files="loco row filetype"
+script_deps="loco row filetype"
 
 ## Destination
 dir=$HOME/bin
