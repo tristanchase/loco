@@ -2,6 +2,8 @@
 #
 # loco
 #
+# Tristan M. Chase
+#
 # A script to do more with the output of locate.
 # A script called row (which see) will work from within this script.
 # A script called filetype appends a character to the end of each line 
@@ -9,14 +11,20 @@
 #
 # Depends: GNU findutils (locate, xargs, updatedb), less, row.sh, filetype.sh
 
-# [Add test for dependencies.]
+# Dependencies
 
-# [Explain what this does.]
+## System
+sys_deps="findutils less"
+
+## loco-specific
+script_deps="loco row filetype"
+
+# Create a temporary file for output of locate 
 outfile=/tmp/loco.$$
 touch ${outfile}
 export outfile
 
-# [Explain what this does.]
+# Remove temporary file on exit
 trap cleanup EXIT
 
 cleanup () {
@@ -30,7 +38,7 @@ awk_statement () {
 	$cmd $obj
 }
 
-# [Explain what this does.]
+# Some searches will have a large amount of output. Ask user if they want to continue with a file larger than 10,000 lines.
 count=$(locate -c "$1")
 
 # [Handle warning about locate database being over 8 days old]
@@ -50,7 +58,7 @@ if [ $count -gt "10000" ]; then
 	esac
 fi
 
-# [Explain what this does.]
+# Harness and organize the output of locate to our temporary file, adding symbols for the file type, line numbers and tabs
 locate -i -0 "$1" | xargs -0 filetype |  sed = | sed 'N;s/\n/\t/' > ${outfile}
 
 # This line adds backslash escapes to the filenames containing spaces.
