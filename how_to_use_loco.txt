@@ -107,7 +107,7 @@ as the ~).  This is how we get row to work from less.  The backticks tell the
 shell to take the output of the script row with the argument 51 (our
 line_number).  The result of that is the text /home/nicky/.bashrc.  That text
 is then used by less as its argument.  It's kind of like the Order of
-Operatioins in math.  The bang (!) at the beginning tells less to run a shell
+Operations in math.  The bang (!) at the beginning tells less to run a shell
 command.
 
 When you are done exploring the file, you can quit with a q.  You will be
