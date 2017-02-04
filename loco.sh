@@ -14,7 +14,7 @@
 # Dependencies
 
 ## System
-sys_deps="findutils less"
+sys_deps="findutils locate less" #findutils provides xargs
 
 ## loco-specific
 script_deps="loco row filetype"
