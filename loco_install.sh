@@ -12,7 +12,7 @@
 ## Dependencies
 
 ### System
-sys_deps="findutils locate less" #updatedb xargs
+sys_deps="findutils locate less" #findutils provides updatedb xargs
 
 ### loco-specific
 script_deps="loco row filetype"
@@ -36,7 +36,7 @@ echo "Downloading script files from GitHub..."
 echo ""
 sleep 2
 
-# Create destination directory and change to it
+### Create destination directory and change to it
 mkdir -p $dir
 cd $dir
 
@@ -46,11 +46,20 @@ for file in $script_deps; do
 	chmod 755 $file   # Make the $file executable
 done
 
-# Create and populate the locate database
+### Download how-to files
+mkdir -p $dir/loco_help
+cd $dir/loco_help
+wget https://raw.githubusercontent.com/tristanchase/loco/master/how_to_use_loco.txt 
+wget https://raw.githubusercontent.com/tristanchase/loco/master/how_to_use_loco.html 
+
+## Create and populate the locate database
 echo "Creating and populating the locate database. This will take a few minutes."
 echo "Stand by..."
+echo ""
 sudo updatedb
+echo ""
 echo "locate database complete."
+echo ""
 
 sleep 2
 echo "Installation complete. You may now use loco by typing it on the command line."
