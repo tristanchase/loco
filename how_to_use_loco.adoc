@@ -114,18 +114,18 @@ as the `~`).  This is how we get *row* to work from *less*.  The backticks tell 
 shell to take the output of the script *row* with the argument 51 (our
 _line_number_).  The result of that is the text /home/nicky/.bashrc.  That text
 is then used by *less* as its argument.  It's kind of like the Order of
-Operatioins in math.  The bang (!) at the beginning tells *less* to run a shell
+Operations in math.  The bang (!) at the beginning tells *less* to run a shell
 command.
 
-When you are done exploring the file, you can quit with a q.  You will be
+When you are done exploring the file, you can quit with a `q`.  You will be
 presented with a line that says:
 ....
 !done (press RETURN)
 ....
-at which point you may press <Return> to continue working with your search or
-press q to quit the active *loco* process.  This will delete the file created in
+at which point you may press `Return` to continue working with your search or
+press `q` to quit the active *loco* process.  This will delete the file created in
 the /tmp directory and clean up any other odds and ends from the search.  If
-you weren't actually done with the search, you can hit <Ctrl>-p to get the
+you weren't actually done with the search, you can hit `Ctrl-p` to get the
 last command and do the search over again.
 
 If you wanted to look at the default bashrc file you would type:
@@ -140,7 +140,7 @@ The idea here is that the commands look like this:
 ....
 !command `row n`
 ....
-where command is the command you want to run and n is the _line_number_.
+where _command_ is the command you want to run and _n_ is the _line_number_.
 
 Try it now in your actual search.  Remember, the line numbers will most likely
 differ from the ones in this example.
