@@ -43,6 +43,11 @@ count=$(locate -c "$1")
 
 # [Handle warning about locate database being over 8 days old]
 
+if [ $count -eq "0" ]; then
+	echo -n $0": Search term not found: "$1
+	exit
+fi
+
 if [ $count -gt "10000" ]; then
 	echo -n "File will have "$count" lines.  Do you wish to continue?(y/N): "; read response
 
