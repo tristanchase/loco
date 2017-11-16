@@ -1,39 +1,42 @@
-Add --help section/option
+TODO
+* Add --help section/option
    Find out if you can less text from within a file
    If not, create a help file and source that
 
-Find out if pagers exist that do not take !(exec shell)
+* Find out if pagers exist that do not take !(exec shell)
    If they do, find out which ones and have loco work around them by activating the "Command: " and "Line No.: " section of the script (define as a function?)
 
-Set pager to $PAGER?
+* Set pager to $PAGER?
 
-[DONE]Figure out !row n command workaround.  Would rather have normal syntax !command n
 
-Set up .conf file?
+* Set up .conf file?
 
-Clean up tabs/indentations in actual file
+* Clean up tabs/indentations in actual file
 
-Push loco as a project
+* Push loco as a project
 
-Add --conf option?
+* Add --conf option?
 
-Configure on first run?
+* Configure on first run?
    Test for .loco.conf file?
 
-.conf parameters:
+* .conf parameters:
    count.entries threshhold
    pager
 
-[DONE]Add find function if count.entries = 0 due to updatedb lag.  Something like find foo somewhere in your $HOME directory and send output to $PAGER in loco style.
+* Switch output of filetype so that the file type symbol comes before the /path/to/file && edit row.sh accordingly (change field number from 2 to 3?).
 
-find $HOME -name *foo* -print0 | xargs -0 filetype | sed = | sed 'N;s/\n/\t/' > ${outfile}
+DONE
++11/16/2017 Find out if rifle will open $outfile. (It will not. However, it *will* open a file from the shell escape [e.g. !rifle `row 52` will open the file on line 52 with the appropriate program if it can find one].)
 
-Display the file a target points to:
++11/16/2017 Display the target file a link points to:
 
 ...
 33	/path/to/link	[@] ->	/path/to/target
 ...
 
-Switch output of filetype so that the file type symbol comes before the /path/to/file && edit row.sh accordingly (change field numbewr fromw 2 to 3?).
++ Add find function if count.entries = 0 due to updatedb lag.  Something like find foo somewhere in your $HOME directory and send output to $PAGER in loco style.
 
-Find out if rifle will open $outfile.
+find $HOME -name *foo* -print0 | xargs -0 filetype | sed = | sed 'N;s/\n/\t/' > ${outfile}
+
++ Figure out !row n command workaround.  Would rather have normal syntax !command n
