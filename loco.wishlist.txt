@@ -8,7 +8,6 @@ TODO
 
 * Set pager to $PAGER?
 
-
 * Set up .conf file?
 
 * Clean up tabs/indentations in actual file
@@ -27,9 +26,9 @@ TODO
 * Switch output of filetype so that the file type symbol comes before the /path/to/file && edit row.sh accordingly (change field number from 2 to 3?).
 
 DONE
-+11/16/2017 Find out if rifle will open $outfile. (It will not. However, it *will* open a file from the shell escape [e.g. !rifle `row 52` will open the file on line 52 with the appropriate program if it can find one].)
++ 2017-11-16 Find out if rifle will open $outfile. (It will not. However, it *will* open a file from the shell escape [e.g. !rifle `row 52` will open the file on line 52 with the appropriate program if it can find one].)
 
-+11/16/2017 Display the target file a link points to:
++ 2017-11-16 Display the target file a link points to:
 
 ...
 33	/path/to/link	[@] ->	/path/to/target
