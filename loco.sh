@@ -63,11 +63,8 @@ if [ $count -gt "10000" ]; then
 	esac
 fi
 
-# Harness and organize the output of locate to our temporary file, adding symbols for the file type, line numbers and tabs
-locate -i -0 "$1" | xargs -0 filetype | sed = | sed 'N;s/\n/\t/' > ${outfile}
-
-# This line adds backslash escapes to the filenames containing spaces.
-#locate -i -0 "$1" | xargs -0 filetype |  sed = | sed 'N;s/\n/\t/' | sed 's/ /\\ /g' > ${outfile}
+# Harness and organize the output of locate to our temporary file, adding symbols for the file type, line numbers and tabs, and escaping spaces
+locate -i -0 "$1" | xargs -0 filetype |  sed = | sed 'N;s:\n:\t:' | sed 's: :\\ :g' > ${outfile}
 
 # Set to pager of choice.  I would like this eventually to be 
 # ncurses-based and self-contaned.
