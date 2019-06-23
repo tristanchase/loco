@@ -62,7 +62,7 @@ locate -i -0 "$1" | xargs -0 filetype |  sed = | sed 'N;s:\n:\t:' | sed 's: :\\ 
 # Set to pager of choice.  I would like this eventually to be 
 # ncurses-based and self-contaned.
 #less -M $outfile
-vim $outfile # I really like this because you can open the files from their path names by using g(fFx)
+vim $outfile # I really like this because you can open the files from their path names by using g[fFx]
 #pg $outfile
 #more $outfile
 #most $outfile # See section below.
