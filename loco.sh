@@ -21,21 +21,14 @@ script_deps="loco row filetype"
 
 # Create a temporary file for output of locate 
 outfile=/tmp/loco.$$
-touch ${outfile}
+touch $outfile
 export outfile
 
 # Remove temporary file on exit
 trap cleanup EXIT
 
 cleanup () {
-	rm ${outfile}
-}
-
-# This is used only when the pager does not take commands (shell escapes).
-awk_statement () {
-	obj=`awk '$1 == '$linenum' { print $2 } ' "${outfile}"`
-	echo "$cmd $obj"
-	$cmd $obj
+	rm $outfile
 }
 
 # Some searches will have a large amount of output. Ask user if they want to continue with a file larger than 10,000 lines.
@@ -64,20 +57,25 @@ if [ $count -gt "10000" ]; then
 fi
 
 # Harness and organize the output of locate to our temporary file, adding symbols for the file type, line numbers and tabs, and escaping spaces
-locate -i -0 "$1" | xargs -0 filetype |  sed = | sed 'N;s:\n:\t:' | sed 's: :\\ :g' > ${outfile}
+locate -i -0 "$1" | xargs -0 filetype |  sed = | sed 'N;s:\n:\t:' | sed 's: :\\ :g' > $outfile
 
 # Set to pager of choice.  I would like this eventually to be 
 # ncurses-based and self-contaned.
-#less -M ${outfile}
-#vim -R ${outfile} # Opens in readonly mode.
-vim ${outfile}
-#pg ${outfile}
-#more ${outfile}
-#most ${outfile} # See section below.
-#w3m ${outfile}
+#less -M $outfile
+vim $outfile # I really like this because you can open the files from their path names by using g(fFx)
+#pg $outfile
+#more $outfile
+#most $outfile # See section below.
+#w3m $outfile
 
 # These lines are here just in case a pager cannot take commands (such as most).
 # Uncomment if necessary.
+#
+#awk_statement () {
+#	obj=`awk '$1 == '$linenum' { print $2 } ' "$outfile"`
+#	echo "$cmd $obj"
+#	$cmd $obj
+#}
 #
 #echo -n "Command: "; read cmd
 #
