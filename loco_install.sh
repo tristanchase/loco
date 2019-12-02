@@ -1,20 +1,20 @@
 #!/bin/bash
+set -e
 #
 # loco_install.sh
 #
 # Tristan M. Chase
 #
-# Installs loco.sh and any related scripts and system software neede to run it.
-
+# Installs loco.sh and any related scripts and system software needed to run it.  This script is built around apt as the package manager.
 
 # Variables
 
 ## Dependencies
 
 ### System
-sys_deps="findutils locate less" #findutils provides updatedb xargs
+sys_deps="findutils locate less wget vim" #findutils provides updatedb xargs
 
-### loco-specific
+### loco-specific (my scripts)
 script_deps="loco row filetype"
 
 ## Destination
@@ -26,7 +26,7 @@ dir=$HOME/bin
 echo "Installing system software needed for loco to run..."
 echo ""
 sleep 2
-sudo apt-get install $sys_deps
+sudo apt install $sys_deps
 sleep 2
 echo "Done installing system software."
 echo ""
@@ -58,7 +58,7 @@ echo "Stand by..."
 echo ""
 sudo updatedb
 echo ""
-echo "locate database complete."
+echo "locate database created."
 echo ""
 
 sleep 2
@@ -71,4 +71,4 @@ echo ""
 
 ## Make sure your locate database is up to date
 
-
+exit 0

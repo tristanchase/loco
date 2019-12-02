@@ -1,26 +1,26 @@
 #!/bin/bash
+set -e
 #
 # loco
 #
 # Tristan M. Chase
 #
-# A script to do more with the output of locate.
-# A script called row (which see) will work from within this script.
-# A script called filetype appends a character to the end of each line 
-# (like ls -F).  I would like to merge it inside this script.
+# A script to do more with the output of locate.  A script called row (which see) will work from within this script.  A script called filetype appends a character to the end of each line (like ls -F).  I would like to merge it inside this script.
 #
-# Depends: GNU findutils (locate, xargs, updatedb), less, row.sh, filetype.sh
+# Depends: GNU findutils ([m]locate, xargs, updatedb), vim, less, wget, row.sh, filetype.sh
 
 # Dependencies
 
 ## System
-sys_deps="findutils locate less" #findutils provides xargs
+sys_deps="findutils [m]locate less wget vim" #findutils provides xargs
 
-## loco-specific
+## loco-specific (my scripts)
 script_deps="loco row filetype"
 
 # Create a temporary file for output of locate 
-outfile=/tmp/loco.$$
+tempfile=$HOME/tmp
+outfile=$tempfile/loco.$$
+mkdir -p $tempfile
 touch $outfile
 export outfile
 
@@ -59,38 +59,11 @@ fi
 # Harness and organize the output of locate to our temporary file, adding symbols for the file type, line numbers and tabs, and escaping spaces
 locate -i -0 "$1" | xargs -0 filetype | sed = | sed 'N;s:\n:\t:' | sed 's: :\\ :g' > $outfile
 
-# Set to pager of choice.  I would like this eventually to be 
-# ncurses-based and self-contaned.
-#less -M $outfile
-vim $outfile # I really like this because you can open the files from their path names by using g[fFx]
+# Set to pager of choice.  I would like this eventually to be ncurses-based and self-contaned.
+less -M $outfile
+#vim $outfile # I really like this because you can open the files from their path names by using g[fFx]
 #pg $outfile
 #more $outfile
-#most $outfile # See section below.
 #w3m $outfile
-
-# These lines are here just in case a pager cannot take commands (such as most).
-# Uncomment if necessary.
-#
-#awk_statement () {
-#	obj=`awk '$1 == '$linenum' { print $2 } ' "$outfile"`
-#	echo "$cmd $obj"
-#	$cmd $obj
-#}
-#
-#echo -n "Command: "; read cmd
-#
-#case $cmd in
-#    q|quit|"")
-#	;;
-#    row*)
-#	echo "$cmd"
-#	$cmd
-#	;;
-#    *)
-#	echo -n "Line No.: "; read linenum 
-#	# add test for NULL or not integer in $linenum
-#	awk_statement
-#	;;
-#esac
 
 exit 0
