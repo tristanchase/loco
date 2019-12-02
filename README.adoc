@@ -23,6 +23,12 @@ search term in their names.  If you narrow the search enough, the results can
 provide you with context and insight as to how the files and software are set
 up and where to look for things like scripts and settings.
 
+== Installing
+
+....
+sh -c "$(curl -fsSL )"
+....
+
 == Quick tutorial
 
 Let's say you want to check your .bashrc file against the default file.  The
