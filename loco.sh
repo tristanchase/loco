@@ -5,7 +5,10 @@ set -e
 #
 # Tristan M. Chase
 #
-# A script to do more with the output of locate.  A script called row (which see) will work from within this script.  A script called filetype appends a character to the end of each line (like ls -F).  I would like to merge it inside this script.
+# A script to do more with the output of *locate*.
+# A script called *row* (which see) will work from within this script.
+# A script called *filetype* appends a character to the end of each line 
+# (like ls -F).  I would like to merge it inside this script.
 #
 # Depends: GNU findutils ([m]locate, xargs, updatedb), vim, less, wget, row.sh, filetype.sh
 
@@ -56,12 +59,14 @@ if [ $count -gt "10000" ]; then
 	esac
 fi
 
-# Harness and organize the output of locate to our temporary file, adding symbols for the file type, line numbers and tabs, and escaping spaces
-locate -i -0 "$1" | xargs -0 filetype | sed = | sed 'N;s:\n:\t:' | sed 's: :\\ :g' > $outfile
+# Harness and organize the output of *locate* to our temporary file, adding symbols for the file type, line numbers and tabs, and escaping spaces (*filetype* handles escaping spaces now)
 
-# Set to pager of choice.  I would like this eventually to be ncurses-based and self-contaned.
-less -M $outfile
-#vim $outfile # I really like this because you can open the files from their path names by using g[fFx]
+locate -i -0 "$1" | xargs -0 filetype | sed = | sed 'N;s/\n/\t/' > $outfile
+
+# Set to pager of choice.
+
+#less -M $outfile
+vim $outfile # I really like this because you can open the files from their path names by using g[fFx]
 #pg $outfile
 #more $outfile
 #w3m $outfile
