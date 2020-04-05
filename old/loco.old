@@ -44,7 +44,7 @@ case $cmd in
 	exit 0
 	;;
     *)
-	echo -n "Line No.: "; read linenum 
+	echo -n "Line No.: "; read linenum
 	# add test for NULL or not integer in $linenum
 	awk_statement
 	;;

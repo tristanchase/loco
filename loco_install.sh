@@ -41,16 +41,16 @@ mkdir -p $dir
 cd $dir
 
 for file in $script_deps; do
-	wget https://raw.githubusercontent.com/tristanchase/$file/master/$file.sh 
-	mv $file.sh $file # Rename the $file (drop the .sh) 
+	wget https://raw.githubusercontent.com/tristanchase/$file/master/$file.sh
+	mv $file.sh $file # Rename the $file (drop the .sh)
 	chmod 755 $file   # Make the $file executable
 done
 
 ### Download how-to files
 mkdir -p $dir/loco_help
 cd $dir/loco_help
-wget https://raw.githubusercontent.com/tristanchase/loco/master/how_to_use_loco.txt 
-wget https://raw.githubusercontent.com/tristanchase/loco/master/how_to_use_loco.html 
+wget https://raw.githubusercontent.com/tristanchase/loco/master/how_to_use_loco.txt
+wget https://raw.githubusercontent.com/tristanchase/loco/master/how_to_use_loco.html
 
 ## Create and populate the locate database
 echo "Creating and populating the locate database. This will take a few minutes."

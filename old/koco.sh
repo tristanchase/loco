@@ -4,7 +4,7 @@
 #
 # A script to do more with the output of locate.
 # A script called row (which see) will work from within this script.
-# A script called filetype appends a character to the end of each line 
+# A script called filetype appends a character to the end of each line
 # (like ls -F).  I would like to merge it inside this script.
 
 infile=/tmp/loco.in.$$
@@ -52,7 +52,7 @@ locate -i -0 "$1" >> ${infile}
 #find $HOME -iname "*$1*" -print0 2>/dev/null >> ${infile}
 cat ${infile} | xargs -0 filetype | sort | uniq | sed = | sed 'N;s/\n/\t/' > ${outfile}
 
-# Set to pager of choice.  I would like this eventually to be 
+# Set to pager of choice.  I would like this eventually to be
 # ncurses-based and self-contaned.
 
 less -M ${outfile}
@@ -74,7 +74,7 @@ less -M ${outfile}
 #	$cmd
 #	;;
 #    *)
-#	echo -n "Line No.: "; read linenum 
+#	echo -n "Line No.: "; read linenum
 #	# add test for NULL or not integer in $linenum
 #	awk_statement
 #	;;

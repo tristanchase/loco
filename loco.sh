@@ -7,7 +7,7 @@ set -e
 #
 # A script to do more with the output of *locate*.
 # A script called *row* (which see) will work from within this script.
-# A script called *filetype* appends a character to the end of each line 
+# A script called *filetype* appends a character to the end of each line
 # (like ls -F).  I would like to merge it inside this script.
 #
 # Depends: GNU findutils ([m]locate, xargs, updatedb), vim, less, wget, row.sh, filetype.sh
@@ -20,7 +20,7 @@ sys_deps="findutils [m]locate less wget vim" #findutils provides xargs
 ## loco-specific (my scripts)
 script_deps="loco row filetype"
 
-# Create a temporary file for output of locate 
+# Create a temporary file for output of locate
 tempfile=$HOME/tmp
 outfile=$tempfile/loco.$$
 mkdir -p $tempfile

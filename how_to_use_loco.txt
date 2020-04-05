@@ -26,7 +26,7 @@ several things that make the shell behave a certain way.  If you've modified
 it heavily, you may want to check it against the default bashrc file to see
 what has been changed, especially if something doesn't seem to be working
 quite right.
- 
+
 COMMAND:
 
 loco search_term
@@ -93,7 +93,7 @@ q to quit
 Running Shell Commands from less
 
 You can also run shell commands from less.  This is how you use the output
-from loco.  To do this you start the command with a bang (!).  
+from loco.  To do this you start the command with a bang (!).
 
 Let's look at our example output from above.  Line 51 contains our .bashrc
 file.  Line 3 contains the default bashrc file.  To see our file we would

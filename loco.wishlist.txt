@@ -1,4 +1,9 @@
 TODO
+* Working on getopt (2020-04-05)
+  * File here /usr/share/doc/util-linux/examples/getopt-parse.bash
+  * Web
+    https://stackoverflow.com/questions/192249/how-do-i-parse-command-line-arguments-in-bash/14203146#14203146
+
 * Add --help section/option
    Find out if you can less text from within a file
    If not, create a help file and source that
