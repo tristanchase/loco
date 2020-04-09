@@ -72,7 +72,7 @@ If there is no file_type symbol after the file_name then it is a regular file.
 
 Understanding less
 
-As stated in the introduction, loco creates a text file in the /tmp folder and
+As stated in the introduction, loco creates a text file in the "$HOME"/tmp folder and
 opens it for viewing in less.  If you're not familiar with less, it's a
 program called a pager that displays the contents of a file.  less is not an
 editor.
@@ -117,7 +117,7 @@ presented with a line that says:
 
 at which point you may press <Return> to continue working with your search or
 press q to quit the active loco process.  This will delete the file created in
-the /tmp directory and clean up any other odds and ends from the search.  If
+the "$HOME"/tmp directory and clean up any other odds and ends from the search.  If
 you weren't actually done with the search, you can hit <Ctrl>-p to get the
 last command and do the search over again.
 
