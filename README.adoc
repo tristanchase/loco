@@ -28,7 +28,7 @@ up and where to look for things like scripts and settings.
 Copy and paste this into your favo[u]rite terminal:
 
 ....
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/tristanchase/loco/master/loco_install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/tristanchase/loco/master/install.sh)"
 ....
 
 == Quick tutorial

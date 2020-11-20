@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 #
-# loco_install.sh
+# install.sh
 #
 # Tristan M. Chase
 #
