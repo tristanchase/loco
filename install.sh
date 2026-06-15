@@ -19,6 +19,7 @@ script_deps="loco row filetype"
 
 ## Destination
 dir=$HOME/bin
+doc=$HOME/.local/share/loco/doc
 
 # Process
 
@@ -47,8 +48,8 @@ for file in $script_deps; do
 done
 
 ### Download how-to files
-mkdir -p $dir/loco_help
-cd $dir/loco_help
+mkdir -p $doc
+cd $doc
 wget https://raw.githubusercontent.com/tristanchase/loco/main/how_to_use_loco.txt
 wget https://raw.githubusercontent.com/tristanchase/loco/main/how_to_use_loco.html
 
@@ -56,14 +57,19 @@ wget https://raw.githubusercontent.com/tristanchase/loco/main/how_to_use_loco.ht
 echo "Creating and populating the locate database. This will take a few minutes."
 echo "Stand by..."
 echo ""
-sudo updatedb
-echo ""
-echo "locate database created."
-echo ""
+sudo updatedb >/dev/null 2>&1
+if [[ "$?" -gt 0 ]]; then
+       	printf "%b\n" "An error occurred while creating the locate database."
+	printf "%b\n" "Please consult the locate documentation."
+else
+	echo ""
+	echo "locate database created."
+	echo ""
 
-sleep 2
-echo "Installation complete. You may now use loco by typing it on the command line."
-echo ""
+	sleep 2
+	echo "Installation complete. You may now use loco by typing it on the command line."
+	echo ""
+fi
 
 ## Check to see if $dir is in $PATH
 
