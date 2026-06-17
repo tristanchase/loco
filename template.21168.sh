@@ -29,8 +29,11 @@
 
 #<todo>
 # TODO
+# * Pass $1 to functions (look to update-notifier)
 # * Write better message for missing argument
-# * Check that _variable="variable definition" (make sure it's in quotes)
+# * Include row.sh and filetype.sh as functions
+# * Add chooser (exclude line numbers from output)
+# * Add option for choosing output
 # * Update usage, description, and options section
 # * Update dependencies section
 
@@ -40,6 +43,7 @@
 # + Modify command substitution to "$(this_style)"
 # + Rename function_name() to function __function_name__ /\w+\(\)
 # + Rename ${variables} to "${_variables}" /\$\w+/s+1 @v vEl,{n
+# + Check that _variable="variable definition" (make sure it's in quotes)
 
 #</todo>
 
@@ -56,8 +60,8 @@
 #<main>
 # Initialize variables
 #_temp="file.$$"
-_tempfile=${HOME/tmp}
-_outfile=${_tempfile/loco.$$}
+_tempfile="${HOME/tmp}"
+_outfile="${_tempfile/loco.$$}"
 
 # List of temp files to clean up on exit (put last)
 _tempfiles=("${_outfile}")
@@ -66,8 +70,8 @@ _tempfiles=("${_outfile}")
 function __main_script__ {
 
 # Create a temporary file for output of locate
-mkdir -p ${_tempfile}
-touch ${_outfile}
+mkdir -p "${_tempfile}"
+touch "${_outfile}"
 export _outfile
 
 # Some searches will have a large amount of output. Ask user if they want to continue with a file larger than 10,000 lines.
@@ -75,15 +79,15 @@ _count=$(locate -c "${_name:-}")
 
 # [Handle warning about locate database being over 8 days old]
 
-if [[ ${_count} -eq "0" ]]; then
+if [[ "${_count}" -eq "0" ]]; then
 	echo "$0"": Search term not found: ""${_name}"
 	exit
 fi
 
-if [[ ${_count} -gt "10000" ]]; then
-	echo -n "File will have "${_count}" lines.  Do you wish to continue?(y/N): "; read _response
+if [[ "${_count}" -gt "10000" ]]; then
+	echo -n "File will have ""${_count}"" lines.  Do you wish to continue?(y/N): "; read _response
 
-	case ${_response} in
+	case "${_response}" in
 		y|Y)
 			echo "Processing..."
 			;;
@@ -97,15 +101,15 @@ fi
 
 # Harness and organize the output of *locate* to our temporary file, adding symbols for the file type, line numbers and tabs, and escaping spaces (*filetype* handles escaping spaces now)
 
-locate -i -0 "${_name}" | xargs -0 filetype | sed = | sed 'N;s/\n/\t/' > ${_outfile}
+locate -i -0 ""${_name}"" | xargs -0 filetype | sed = | sed 'N;s/\n/\t/' > "${_outfile}"
 
 # Set to pager of choice.
 
-#less -M ${_outfile}
-vim ${_outfile} # I really like this because you can open the files from their path names by using g[fFx]
-#pg ${_outfile}
-#more ${_outfile}
-#w3m ${_outfile}
+#less -M "${_outfile}"
+vim "${_outfile}" # I really like this because you can open the files from their path names by using g[fFx]
+#pg "${_outfile}"
+#more "${_outfile}"
+#w3m "${_outfile}"
 
 } #end __main_script__
 #</main>
