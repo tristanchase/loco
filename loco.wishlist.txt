@@ -11,20 +11,20 @@ TODO
 * Find out if pagers exist that do not take !(exec shell)
    If they do, find out which ones and have loco work around them by activating the "Command: " and "Line No.: " section of the script (define as a function?)
 
-* Set pager to $PAGER?
+x Set pager to $PAGER?
 
-* Set up .conf file?
+x Set up .conf file?
 
-* Clean up tabs/indentations in actual file
+x Clean up tabs/indentations in actual file
 
 * Push loco as a project
 
-* Add --conf option?
+x Add --conf option?
 
-* Configure on first run?
+x Configure on first run?
    Test for .loco.conf file?
 
-* .conf parameters:
+x .conf parameters:
    count.entries threshhold
    pager
 

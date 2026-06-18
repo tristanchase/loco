@@ -29,11 +29,17 @@
 
 #<todo>
 # TODO
+# * Set up share dir
 # * Pass $1 to functions (look to update-notifier)
 # * Write better message for missing argument
 # * Include row.sh and filetype.sh as functions
 # * Add chooser (exclude line numbers from output)
-# * Add option for choosing output
+# * Add --tutorial option
+# * Add max entries variable
+# * Add --max-entries option
+# * Add output variable ($PAGER or $VISUAL)
+# * Add --output option
+# * Handle warning about locate database being over 8 days old
 # * Update usage, description, and options section
 # * Update dependencies section
 
