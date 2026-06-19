@@ -29,15 +29,14 @@
 
 #<todo>
 # TODO
-# * Set up share dir
 # * Pass $1 to functions (look to update-notifier)
 # * Write better message for missing argument
 # * Include row.sh and filetype.sh as functions
 # * Add chooser (exclude line numbers from output)
-# * Add --tutorial option
-# * Add max entries variable
+# * Create __tutorial__ function
+# 	- Set up share dir in __tutorial__
+# 	* Add --tutorial option
 # * Add --max-entries option
-# * Add output variable ($PAGER or $VISUAL)
 # * Add --output option
 # * Handle warning about locate database being over 8 days old
 # * Update usage, description, and options section
@@ -50,6 +49,8 @@
 # + Rename function_name() to function __function_name__ /\w+\(\)
 # + Rename ${variables} to "${_variables}" /\$\w+/s+1 @v vEl,{n
 # + Check that _variable="variable definition" (make sure it's in quotes)
+# + Add max entries variable
+# + Add output variable ($PAGER or $VISUAL)
 
 #</todo>
 
@@ -66,8 +67,12 @@
 #<main>
 # Initialize variables
 #_temp="file.$$"
-_tempfile="${HOME/tmp}"
-_outfile="${_tempfile/loco.$$}"
+_share_dir="${HOME/.local/share}"
+_doc_dir="${_share_dir/doc}"
+_max_entries="10000"	# Change with --max-entries option
+_output="${VISUAL}" 	# Change with --output option
+_temp_dir="${HOME/tmp}"
+_outfile="${_temp_dir/loco.$$}"
 
 # List of temp files to clean up on exit (put last)
 _tempfiles=("${_outfile}")
@@ -76,7 +81,7 @@ _tempfiles=("${_outfile}")
 function __main_script__ {
 
 # Create a temporary file for output of locate
-mkdir -p "${_tempfile}"
+mkdir -p "${_temp_dir}"
 touch "${_outfile}"
 export _outfile
 
